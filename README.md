@@ -4,6 +4,8 @@ Implements the needed builders and parsers for SA:MP's/Open Multiplayer's [Query
 
 At the moment, you can only parse packets with opcodes `i`, `r`, `c`, `d`, `o` and `p`.
 
+You cannot send RCON packets yet.
+
 ## Examples
 
 You can check `lib.rs` to see how the tests for this library are crafted.
