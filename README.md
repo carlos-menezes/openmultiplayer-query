@@ -1,6 +1,8 @@
 # openmultiplayer-query
 
-Implements the needed builders and parsers for [query mechanism](https://sampwiki.blast.hk/wiki/Query_Mechanism), allowing a developer to retrieve data from a running server.
+Implements the needed builders and parsers for SA:MP's/Open Multiplayer's [Query Mechanism](https://sampwiki.blast.hk/wiki/Query_Mechanism), allowing a developer to retrieve data from a running server.
+
+At the moment, you can only parse packets with opcodes `i`, `r`, `c`, `d`, `o` and `p`.
 
 ## Examples
 
