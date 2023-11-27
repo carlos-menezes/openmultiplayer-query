@@ -129,8 +129,7 @@ impl TryFrom<&[u8]> for InformationPacket {
         cursor
             .by_ref()
             .take(gamemode_len as u64)
-            .read_to_string(&mut gamemode)
-            .map_err(|e| std::io::Error::new(std::io::ErrorKind::InvalidData, e))?;
+            .read_to_string(&mut gamemode)?;
 
         let language_len = cursor.read_u32::<LittleEndian>()? as usize;
         let mut language = vec![0; language_len];
