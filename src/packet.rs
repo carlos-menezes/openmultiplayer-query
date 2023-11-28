@@ -10,7 +10,7 @@ use encoding_rs::WINDOWS_1251;
 use crate::{errors::PacketError, opcodes::Opcode};
 
 #[derive(Debug)]
-pub struct Packet {
+pub struct PacketBuilder {
     pub opcode: Opcode,
     pub address: Ipv4Addr,
     pub port: u16,
@@ -62,25 +62,22 @@ pub struct IsOpenMultiplayerServerPacket(pub bool);
 #[derive(Debug)]
 pub struct PingPacket(pub [u8; 4]);
 
-impl Packet {
-    pub fn new<T: Into<IpAddr>>(
-        opcode: Opcode,
-        address: T,
-        port: u16,
-    ) -> Result<Packet, PacketError> {
-        let addr = address.into();
-        match addr {
-            IpAddr::V4(ipv4_addr) => Ok(Self {
-                opcode,
-                address: ipv4_addr,
-                port,
-                data: None,
-            }),
-            _ => Err(PacketError::InvalidAddress(addr.to_string())),
-        }
-    }
+// TODO: Implement RCON packet
+#[derive(Debug)]
+pub struct RconPacket {
+    pub address: Ipv4Addr,
+    pub port: u16,
+    pub password: String,
+    pub command: String,
+    data: Option<Vec<u8>>,
+}
 
-    pub fn build(&mut self) -> Result<(), PacketError> {
+pub trait Packet {
+    fn build(&mut self) -> Result<(), PacketError>;
+}
+
+impl Packet for PacketBuilder {
+    fn build(&mut self) -> Result<(), PacketError> {
         let mut data = [0u8; 11];
 
         // Fill 'SAMP'
@@ -98,9 +95,55 @@ impl Packet {
         self.data = Some(data);
         Ok(())
     }
+}
+
+impl PacketBuilder {
+    pub fn new<T: Into<IpAddr>>(
+        opcode: Opcode,
+        address: T,
+        port: u16,
+    ) -> Result<PacketBuilder, PacketError> {
+        let addr = address.into();
+        match addr {
+            IpAddr::V4(ipv4_addr) => Ok(Self {
+                opcode,
+                address: ipv4_addr,
+                port,
+                data: None,
+            }),
+            _ => Err(PacketError::InvalidAddress(addr.to_string())),
+        }
+    }
 
     pub fn get_data(&self) -> Result<&[u8; 11], PacketError> {
         self.data.as_ref().ok_or(PacketError::PacketNotBuilt)
+    }
+}
+
+impl Packet for RconPacket {
+    fn build(&mut self) -> Result<(), PacketError> {
+        todo!()
+    }
+}
+
+impl RconPacket {
+    fn new<T: Into<IpAddr>>(
+        address: T,
+        port: u16,
+        password: &str,
+        command: &str,
+    ) -> Result<Self, PacketError> {
+        let addr = address.into();
+        match addr {
+            IpAddr::V4(ipv4_addr) => Ok(Self {
+                command: command.into(),
+                password: password.into(),
+                address: ipv4_addr,
+                port,
+                data: None,
+            }),
+            _ => Err(PacketError::InvalidAddress(addr.to_string())),
+        }
     }
 }
 
