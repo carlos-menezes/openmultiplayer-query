@@ -20,7 +20,7 @@ let socket = UdpSocket::bind("0.0.0.0:0")?;
 let address: Ipv4Addr = "149.56.84.18".parse::<Ipv4Addr>().unwrap();
 let port = 7777;
 
-let mut packet = Packet::new(Opcodes::I, address, port)?;
+let mut packet = PacketBuilder::new(Opcodes::I, address, port)?;
 // ...
 packet.build()?; // This is needed in order to populate the data buffer with query data.
 
