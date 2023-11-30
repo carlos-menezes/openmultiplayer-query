@@ -4,7 +4,9 @@ Implements the needed builders and parsers for SA:MP's/Open Multiplayer's [Query
 
 You cannot send RCON packets yet.
 
-## I
+## Installation
+
+`cargo add openmultiplayer_query`
 
 ## Examples
 
