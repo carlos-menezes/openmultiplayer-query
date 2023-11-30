@@ -1,6 +1,6 @@
 [package]
 name = "openmultiplayer_query"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Implements the needed builders and parsers for SA:MP's/Open Multiplayer's Query Mechanism, allowing a developer to retrieve data from a running server."
 license = "MIT"
