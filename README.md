@@ -1,6 +1,7 @@
 # openmultiplayer-query
 
-![ci workflow](https://github.com/carlos-menezes/openmultiplayer-query/actions/workflows/ci.yml/badge.svg)
+![ci workflow](https://github.com/carlos-menezes/openmultiplayer-query/actions/workflows/ci.yml/badge.svg) ![Crates.io](https://img.shields.io/crates/v/openmultiplayer_query)
+
 
 Implements the needed builders and parsers for SA:MP's/Open Multiplayer's [Query Mechanism](https://sampwiki.blast.hk/wiki/Query_Mechanism), allowing a developer to retrieve data from a running server.
 
