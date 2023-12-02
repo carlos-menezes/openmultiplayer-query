@@ -1,5 +1,7 @@
 # openmultiplayer-query
 
+![ci workflow](https://github.com/carlos-menezes/openmultiplayer-query/actions/workflows/ci.yml/badge.svg)
+
 Implements the needed builders and parsers for SA:MP's/Open Multiplayer's [Query Mechanism](https://sampwiki.blast.hk/wiki/Query_Mechanism), allowing a developer to retrieve data from a running server.
 
 You cannot send RCON packets yet.
@@ -10,7 +12,7 @@ You cannot send RCON packets yet.
 
 ## Examples
 
-You can check `test/packet.rs` to see how the tests for this library are crafted.
+Check `test/build.rs` and `test/parse.rs` to see how to use the library.
 
 ```rs
 use openmultiplayer_query::{Packet, Opcodes};

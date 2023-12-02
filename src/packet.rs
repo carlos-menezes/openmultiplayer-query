@@ -122,12 +122,27 @@ impl PacketBuilder {
 
 impl Packet for RconPacket {
     fn build(&mut self) -> Result<(), PacketError> {
-        todo!()
+        let password_len = self.password.len();
+        let command_len = self.command.len();
+
+        let mut packet_data = Vec::new();
+
+        packet_data.push((password_len & 0xFF) as u8);
+        packet_data.push((password_len >> 8 & 0xFF) as u8);
+        packet_data.extend(self.password.bytes());
+
+        packet_data.push((command_len & 0xFF) as u8);
+        packet_data.push((command_len >> 8 & 0xFF) as u8);
+        packet_data.extend(self.command.bytes());
+
+        self.data = Some(packet_data);
+
+        Ok(())
     }
 }
 
 impl RconPacket {
-    fn new<T: Into<IpAddr>>(
+    pub fn new<T: Into<IpAddr>>(
         address: T,
         port: u16,
         password: &str,
@@ -144,6 +159,10 @@ impl RconPacket {
             }),
             _ => Err(PacketError::InvalidAddress(addr.to_string())),
         }
+    }
+
+    pub fn get_data(&self) -> Result<&Vec<u8>, PacketError> {
+        self.data.as_ref().ok_or(PacketError::PacketNotBuilt)
     }
 }
 
