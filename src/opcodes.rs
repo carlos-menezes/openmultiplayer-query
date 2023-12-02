@@ -9,9 +9,9 @@ pub enum Opcode {
     O, // Checks whether the server is using open.mp or not.
 }
 
-impl Into<u8> for Opcode {
-    fn into(self) -> u8 {
-        match self {
+impl From<Opcode> for u8 {
+    fn from(opcode: Opcode) -> Self {
+        match opcode {
             Opcode::I => b'i',
             Opcode::R => b'r',
             Opcode::C => b'c',
