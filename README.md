@@ -10,7 +10,7 @@ You cannot send RCON packets yet.
 
 ## Examples
 
-You can check `tets/packet.rs` to see how the tests for this library are crafted.
+You can check `test/packet.rs` to see how the tests for this library are crafted.
 
 ```rs
 use openmultiplayer_query::{Packet, Opcodes};
