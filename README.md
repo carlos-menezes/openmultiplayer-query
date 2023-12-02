@@ -17,7 +17,8 @@ Check `test/build.rs` and `test/parse.rs` to see how to use the library.
 ### Building
 
 ```rs
-let mut packet = PacketBuilder::new(Opcode::I, Ipv4Addr::new(127, 0, 0, 1), 7777).unwrap();
+let mut packet = PacketBuilder::new(Opcode::I, Ipv4Addr::new(127, 0, 0, 1), 7777)?;
+let mut rcon_packet = RconPacket::new(Ipv4Addr::new(127, 0, 0, 1), 7777, "changeme", "varlist")?;
 ```
 
 ### Parsing
