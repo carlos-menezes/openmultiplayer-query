@@ -14,6 +14,14 @@ You cannot send RCON packets yet.
 
 Check `test/build.rs` and `test/parse.rs` to see how to use the library.
 
+### Building
+
+```rs
+let mut packet = PacketBuilder::new(Opcode::I, Ipv4Addr::new(127, 0, 0, 1), 7777).unwrap();
+```
+
+### Parsing
+
 ```rs
 use openmultiplayer_query::{Packet, Opcodes};
 
